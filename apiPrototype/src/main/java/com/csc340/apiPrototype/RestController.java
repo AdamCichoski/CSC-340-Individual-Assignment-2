@@ -13,17 +13,75 @@ import java.util.logging.Logger;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController{
+    /**
+     * Home page endpoint for a base look up
+     * @return
+     */
     @GetMapping("")
     public String home(){
         return "Welcome to the home page";
     }
 
     /**
-     *
+     * Definition of software endpoint from Dictionary API
      * @return an ArrayList of Strings with the most relevant data in the api under the term "software"
      */
     @GetMapping("/software")
     public Object getWeather(){
+        /*
+        I wanted to pull out the word, the type of speech it is used for, and any definitions.
+        The response from the API looks like this:
+                {
+                    "word": "software",
+                    "phonetic": "/ˈsɑftˌwɛɹ/",
+                    "phonetics": [
+                        {
+                            "text": "/ˈsɑftˌwɛɹ/",
+                            "audio": ""
+                        },
+                        {
+                            "text": "/ˈsɒftˌwɛə/",
+                            "audio": ""
+                        },
+                        {
+                            "text": "/ˈsɔftˌwɛɹ/",
+                            "audio": "https://api.dictionaryapi.dev/media/pronunciations/en/software-us.mp3",
+                            "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=2100853",
+                            "license": {
+                                "name": "BY-SA 3.0",
+                                "url": "https://creativecommons.org/licenses/by-sa/3.0"
+                            }
+                        }
+                    ],
+                    "meanings": [
+                        {
+                            "partOfSpeech": "noun",
+                            "definitions": [
+                                {
+                                    "definition": "Encoded computer instructions, usually modifiable (unless stored in some form of unalterable memory such as ROM).",
+                                    "synonyms": [],
+                                    "antonyms": []
+                                },
+                                {
+                                    "definition": "The human beings involved in warfare, as opposed to hardware such as weapons and vehicles.",
+                                    "synonyms": [],
+                                    "antonyms": []
+                                }
+                            ],
+                            "synonyms": [],
+                            "antonyms": []
+                        }
+                    ],
+                    "license": {
+                        "name": "CC BY-SA 3.0",
+                        "url": "https://creativecommons.org/licenses/by-sa/3.0"
+                    },
+                    "sourceUrls": [
+                        "https://en.wiktionary.org/wiki/software"
+                    ]
+                }
+         */
+
         try{
             String url = "https://api.dictionaryapi.dev/api/v2/entries/en/software";
             RestTemplate restTemplate = new RestTemplate();
